@@ -22,6 +22,8 @@ public class CharacterMovement : MonoBehaviour
     // Animator property
     private Animator anim;
 
+    // Creating a new ring effect object.
+    public GameObject ringEffect;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -51,7 +53,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Move the player by a certain amount forward depending on how much time has passed.
-        rb.transform.position = transform.position + transform.forward * 2 * Time.deltaTime;
+        rb.transform.position = transform.position + transform.forward * 4 * Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -112,14 +114,25 @@ public class CharacterMovement : MonoBehaviour
 
     /// <summary>
     /// Method is called whenever the character touches a ring (Collides with object)
+    /// When a ring is collected, it is destroyed and the score is increased.
+    /// The ring effect will also be shown.
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Ring")
         {
-            Destroy(other.gameObject);
+            // Increase the current score.
             gameManager.IncreaseScore();
+
+            // Create a RingEffect object in the position of the raystart (Chest) of our player. (Quaternion.identity means no rotation)
+            GameObject ringParticles = Instantiate(ringEffect, rayStart.transform.position, Quaternion.identity);
+
+            // Destroy the particles after 2 seconds.
+            Destroy(ringParticles, 2);
+
+            // Destroy the ring Object. (LOTR Music playing)
+            Destroy(other.gameObject);
         }
     }
 }
