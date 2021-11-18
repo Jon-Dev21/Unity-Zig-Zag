@@ -74,10 +74,31 @@ public class CharacterMovement : MonoBehaviour
             // Sets the value of the trigger parameter in the animation controller.
             anim.SetTrigger("isFalling");
         }
+
+        // If the character fell,
+        if(transform.position.y < -2)
+        {
+            // End the game.
+            gameManager.EndGame();
+        }
     }
 
+    /// <summary>
+    /// Method used to change character direction. 
+    /// Direction can be either 45 degrees or -45 degrees.
+    /// Direction will change when the spacebar is pressed.
+    /// </summary>
     private void Switch()
     {
+        // Preventing player to change direction before starting game.
+        // Check if game has not started.
+        if (!gameManager.gameStarted)
+        {
+            // Don't start moving player.
+            return;
+        }
+
+        // Change ballue from true to false and vice versa.
         IsWalkingRight = !IsWalkingRight;
 
         // If the player is walking right, change the player's rotation to 45 degrees
@@ -86,5 +107,19 @@ public class CharacterMovement : MonoBehaviour
         else 
             // If the player is walking left, change the player's rotation to -45 degrees
             transform.rotation = Quaternion.Euler(0, -45, 0);
+    }
+
+
+    /// <summary>
+    /// Method is called whenever the character touches a ring (Collides with object)
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Ring")
+        {
+            Destroy(other.gameObject);
+            gameManager.IncreaseScore();
+        }
     }
 }
