@@ -23,7 +23,7 @@ public class CharacterController : MonoBehaviour
     // Function called every fixed framerate frame
     private void FixedUpdate()
     {
-        // Mpve the player by a certain amount forward depending on how much time has passed.
+        // Move the player by a certain amount forward depending on how much time has passed.
         rb.transform.position = transform.position + transform.forward * 2 * Time.deltaTime;
     }
 
