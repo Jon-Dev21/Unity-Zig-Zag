@@ -78,6 +78,11 @@ public class CharacterMovement : MonoBehaviour
         {
             // Sets the value of the trigger parameter in the animation controller.
             anim.SetTrigger("isFalling");
+        } else
+        {
+            // Used to fix animation in case of a near fall scenario.
+            // (Player almost falls but stays in stage)
+            anim.SetTrigger("notFallingAnymore");
         }
 
         // If the character fell,
