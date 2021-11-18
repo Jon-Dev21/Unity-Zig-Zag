@@ -6,7 +6,7 @@
 ## About Zig-Zag
 Zig Zag is an infinite 3d runner game where you simply run left and right and collect crystals.
 
-### How to play this version of Zig-Zag
+## How to play this version of Zig-Zag
 To start the game, press enter.
 To change directions, press the space bar.
 
