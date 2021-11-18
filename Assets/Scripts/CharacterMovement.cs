@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Script used for the player movement.
 /// </summary>
-public class CharacterController : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     // Object to store a rigid body.
     private Rigidbody rb;
@@ -13,11 +13,21 @@ public class CharacterController : MonoBehaviour
     // Variable to check if the player is walking left or right.
     private bool IsWalkingRight = true;
 
+    // Run a ray from the bottom of our character and see if we hit a physical body.
+    public Transform rayStart;
+
+    // Animator property
+    private Animator anim;
+
+
     // Awake is called when the script instance is being loaded
     void Awake()
     {
         // Initialize the rigid body. (Getting character's rigid body)
         rb = GetComponent<Rigidbody>();
+
+        // Initialize the Animator. (Getting character's animations.)
+        anim = GetComponent<Animator>();
     }
 
     // Function called every fixed framerate frame
@@ -35,6 +45,17 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Switch();
+        }
+
+        // Creating a raycastHit to check if a ray hit a physical body below the character.
+        RaycastHit hit;
+
+        // Check if we're still running on ground / not falling.
+        // If the ray has not hit anything below the player, it is falling.
+        if (!Physics.Raycast(rayStart.position, -transform.up, out hit, Mathf.Infinity))
+        {
+            // Sets the value of the trigger parameter in the animation controller.
+            anim.SetTrigger("isFalling");
         }
     }
 
