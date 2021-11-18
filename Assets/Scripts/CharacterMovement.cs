@@ -143,12 +143,12 @@ public class CharacterMovement : MonoBehaviour
             Destroy(other.gameObject);
 
             // Play the ring sound when picked
-            if (!ringSound.isPlaying)
-                ringSound.Play();
-            else
-                ringSound.Stop();
+            //if (!ringSound.isPlaying)
+            //    ringSound.Play();
+            //else
+            //    ringSound.Stop();
 
-            //ringSound.PlayOneShot(ringSound.clip);
+            ringSound.PlayOneShot(ringSound.clip);
         }
     }
 }
