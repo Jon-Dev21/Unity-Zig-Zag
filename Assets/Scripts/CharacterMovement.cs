@@ -25,6 +25,9 @@ public class CharacterMovement : MonoBehaviour
     // Creating a new ring effect object.
     public GameObject ringEffect;
 
+    // An audioSource for the ring sound when picked up.
+    public AudioSource ringSound;
+
     // Awake is called when the script instance is being loaded
     void Awake()
     {
@@ -53,7 +56,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Move the player by a certain amount forward depending on how much time has passed.
-        rb.transform.position = transform.position + transform.forward * 4 * Time.deltaTime;
+        rb.transform.position = transform.position + transform.forward * 5 * Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -133,6 +136,9 @@ public class CharacterMovement : MonoBehaviour
 
             // Destroy the ring Object. (LOTR Music playing)
             Destroy(other.gameObject);
+
+            // Play the ring sound when picked
+            ringSound.Play();
         }
     }
 }
