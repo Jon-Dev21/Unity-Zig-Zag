@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class CharacterMovement : MonoBehaviour
 {
+    // Game manager object to handle game states.
+    private GameManager gameManager;
+
     // Object to store a rigid body.
     private Rigidbody rb;
 
@@ -23,6 +26,9 @@ public class CharacterMovement : MonoBehaviour
     // Awake is called when the script instance is being loaded
     void Awake()
     {
+        // Initialize our game manager. (This object contains our script code).
+        gameManager = FindObjectOfType<GameManager>();
+
         // Initialize the rigid body. (Getting character's rigid body)
         rb = GetComponent<Rigidbody>();
 
@@ -33,6 +39,17 @@ public class CharacterMovement : MonoBehaviour
     // Function called every fixed framerate frame
     private void FixedUpdate()
     {
+        // Check if game has not started.
+        if(!gameManager.gameStarted)
+        {
+            // Don't start moving player.
+            return;
+        } else // The game is started
+        {
+            // Set the animation trigger, gameStarted in order to move from idle animation to running animation.
+            anim.SetTrigger("gameStarted");
+        }
+
         // Move the player by a certain amount forward depending on how much time has passed.
         rb.transform.position = transform.position + transform.forward * 2 * Time.deltaTime;
     }
