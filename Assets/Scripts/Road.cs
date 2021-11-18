@@ -66,8 +66,6 @@ public class Road : MonoBehaviour
 
         // Random number that will be used to compare it to the road count.
         float spawnIn = Random.Range(1, 3);
-        Debug.Log("Spawn In: "+spawnIn);
-        Debug.Log("Road Count: " + roadCount);
         // If the roadCount is bigger than the spawnIn range, reset it to 0.
         if (roadCount>2)
         {
@@ -77,7 +75,6 @@ public class Road : MonoBehaviour
             // If the row count is equal to the spawnIn number.
             if(roadCount == spawnIn)
             {
-                Debug.Log("Road Count is Equal to Spawn in");
                 // Show the ring
                 roadBlock.transform.GetChild(0).gameObject.SetActive(true);
             }
