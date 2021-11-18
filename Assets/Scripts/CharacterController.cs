@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script used for the player movement.
+/// </summary>
 public class CharacterController : MonoBehaviour
 {
     // Object to store a rigid body.
