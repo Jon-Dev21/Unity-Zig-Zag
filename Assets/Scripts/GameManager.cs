@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     // Text element for the current highscore in the game.
     public Text highscoreText;
 
+
     /// <summary>
     /// Will get highscore from player prefs on awake.
     /// </summary>
@@ -31,11 +32,15 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets gameStarted to true
+    /// Sets gameStarted to true and starts generating map.
     /// </summary>
     public void StartGame()
     {
+        // Set gameStarted to true
         gameStarted = true;
+
+        // Call the start building method from the Road script.
+        FindObjectOfType<Road>().StartBuilding();
     }
 
     /// <summary>
