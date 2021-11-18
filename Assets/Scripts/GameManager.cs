@@ -15,7 +15,20 @@ public class GameManager : MonoBehaviour
     // Variable used to store the game score.
     public int score;
 
+    // Text element for the current score in the game.
     public Text scoreText;
+
+    // Text element for the current highscore in the game.
+    public Text highscoreText;
+
+    /// <summary>
+    /// Will get highscore from player prefs on awake.
+    /// </summary>
+    private void Awake()
+    {
+        // Set the highscore.
+        highscoreText.text = "Highscore: " + GetHighScore().ToString();
+    }
 
     /// <summary>
     /// Sets gameStarted to true
@@ -36,10 +49,16 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// This method increases the score by 1.
+    /// It also sets the highscore.
     /// </summary>
     public void IncreaseScore()
     {
         score++;
+        scoreText.text = "Score: " + score.ToString();
+        if (score > GetHighScore())
+        {
+            PlayerPrefs.SetInt("Highscore", score);
+        }
     }
 
     /// <summary>
@@ -53,6 +72,14 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
-        scoreText.text = "Score: "+score.ToString();
+    }
+
+    /// <summary>
+    /// Method returns the high score from PlayerPrefs.
+    /// </summary>
+    /// <returns></returns>
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("Highscore");
     }
 }
